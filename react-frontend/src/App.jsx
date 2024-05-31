@@ -2,11 +2,12 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import { apiDomain } from "./environmentVariables";
 
 function App() {
   const [count, setCount] = useState(0);
   const [data, setData] = useState("");
-  const fetchcall = fetch("http://localhost:8000/accounts/manage-account/");
+  const fetchcall = fetch(apiDomain + "/accounts/manage-account/");
   fetchcall
     .then((value) => value.json())
     .then((value) => setData(value["mydata"]));
@@ -28,7 +29,7 @@ function App() {
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
       <p className="read-the-docs">
