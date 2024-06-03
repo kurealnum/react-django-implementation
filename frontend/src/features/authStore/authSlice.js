@@ -6,11 +6,11 @@ export const authSlice = createSlice({
     value: "123",
   },
   reducers: {
-    set: (state, action) => {
+    set_csrf: (state, action) => {
       state.value = action.payload;
     },
   },
 });
 
-export const { set } = authSlice.actions;
+export const { set_csrf } = authSlice.actions;
 export default authSlice.reducer;

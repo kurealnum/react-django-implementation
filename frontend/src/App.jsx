@@ -1,29 +1,33 @@
 import { useState } from "react";
 import "./styles/App.css";
-import { apiDomain } from "./environmentVariables";
 import { useSelector, useDispatch } from "react-redux";
-import { set } from "./features/authStore/authSlice";
+import { set_csrf } from "./features/authStore/authSlice";
+import { login } from "./features/auth";
 
 function App() {
-  const [data, setData] = useState("");
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.value);
 
-  function testRequest() {
-    const fetchcall = fetch(apiDomain + "/accounts/manage-account/");
-    fetchcall
-      .then((value) => value.json())
-      .then((value) => setData(value["mydata"]));
-    console.log(data);
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const onFormChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  function onFormSubmit(e) {
+    e.preventDefault();
+    login(formData);
   }
 
   return (
     <>
-      <button onClick={testRequest}>Click me!</button>
-      <button onClick={() => dispatch(set("ABC"))}>
-        Change Value of CSRF Token
-      </button>
-      <p>{token}</p>
+      <form onSubmit={(e) => onFormSubmit(e)}>
+        <input name="username" onChange={(e) => onFormChange(e)}></input>
+        <input
+          name="password"
+          onChange={(e) => onFormChange(e)}
+          type="password"
+        ></input>
+        <button type="submit">Login</button>
+      </form>
     </>
   );
 }
