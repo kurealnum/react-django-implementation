@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { authReducer } from "../../reducers/auth";
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    value: "123",
+    isAuthenticated: false,
   },
   reducers: {
-    set_csrf: (state, action) => {
-      state.value = action.payload;
-    },
+    checkAuthenticated: authReducer,
   },
 });
 
-export const { set_csrf } = authSlice.actions;
+export const { checkAuthenticated } = authSlice.actions;
+console.log(authSlice.actions);
 export default authSlice.reducer;

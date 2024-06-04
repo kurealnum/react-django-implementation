@@ -1,16 +1,14 @@
 import { useState } from "react";
 import "./styles/App.css";
-import { useSelector, useDispatch } from "react-redux";
-import { set_csrf } from "./features/authStore/authSlice";
 import { login } from "./features/auth";
+import { useSelector } from "react-redux";
 
 function App() {
-  const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.value);
-
   const [formData, setFormData] = useState({ username: "", password: "" });
   const onFormChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   function onFormSubmit(e) {
     e.preventDefault();
@@ -28,6 +26,7 @@ function App() {
         ></input>
         <button type="submit">Login</button>
       </form>
+      <span>{isAuthenticated}</span>
     </>
   );
 }
