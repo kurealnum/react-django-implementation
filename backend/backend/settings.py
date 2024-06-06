@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from django.core.management.commands.runserver import Command as runserver
+from dotenv import load_dotenv
+from os.path import join, dirname
+from os import environ
+import json
+
+# Loading environment variables
+dotenv_path = join(dirname(__file__), "settings.env")
+load_dotenv(dotenv_path)
 
 # Changing the default port of the runserver command
 runserver.default_port = "6900"
@@ -24,12 +32,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-0(hoaih@4m9&cunhw0dni-b=2#yts^_1p13k=$*n56z+#1on7$"
+SECRET_KEY = environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = json.loads(environ.get("ALLOWED_HOSTS", []))  # type: ignore
 
 
 # Application definition
@@ -131,28 +139,15 @@ STATIC_ROOT = "collectedstatic/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8001",
-    "http://127.0.0.1:8001",
-    "http://localhost:80",
-    "http://127.0.0.1:80",
-]
+CORS_ALLOWED_ORIGINS = json.loads(environ.get("CORS_ALLOWED_ORIGINS"))  # type: ignore
+CSRF_TRUSTED_ORIGINS = json.loads(environ.get("CORS_ALLOWED_ORIGINS"))  # type: ignore
+CSRF_COOKIE_SAMESITE = environ.get("CSRF_COOKIE_SAMESITE")
+SESSION_COOKIE_SAMESITE = environ.get("SESSION_COOKIE_SAMESITE")
+CSRF_COOKIE_HTTPONLY = environ.get("CSRF_COOKIE_HTTPONLY", "False") == "True"
+SESSION_COOKIE_HTTPONLY = environ.get("SESSION_COOKIE_HTTPONLY", "False") == "True"
 
-CSRF_COOKIE_SAMESITE = "Lax"
-SESSION_COOKIE_SAMESITE = "Lax"
-CSRF_COOKIE_HTTPONLY = True
-SESSION_COOKIE_HTTPONLY = True
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8001",
-    "http://127.0.0.1:8001",
-    "http://localhost:80",
-    "http://127.0.0.1:80",
-]
+CSRF_COOKIE_SECURE = environ.get("SESSION_COOKIE_HTTPONLY", "False") == "True"
+SESSION_COOKIE_SECURE = environ.get("SESSION_COOKIE_HTTPONLY", "False") == "True"
 
-
-# PROD ONLY
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
-
-CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
-CORS_ALLOW_CREDENTIALS = True
+CORS_EXPOSE_HEADERS = environ.get("CORS_EXPOSE_HEADERS")
+CORS_ALLOW_CREDENTIALS = environ.get("SESSION_COOKIE_HTTPONLY", "False") == "True"

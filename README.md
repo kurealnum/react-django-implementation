@@ -15,6 +15,27 @@ Just an example of how React and Django can play nice.
 - CD into `backend`.
 - Create and activate a virtual environment
 - Run `pip install -r requirements.txt`
+- Create a file called `backend/backend/settings.env`
+- Paste (and edit as necessarry) these variables:
+
+```
+DJANGO_SECRET_KEY="my-secret-key"
+DEBUG=True
+ALLOWED_HOSTS='["*"]'
+
+CORS_ALLOWED_ORIGINS='["http://localhost:80","http://127.0.0.1:80"]'
+CSRF_TRUSTED_ORIGINS='["http://localhost:80","http://127.0.0.1:80"]'
+
+CSRF_COOKIE_SAMESITE="Strict"
+SESSION_COOKIE_SAMESITE="Strict"
+CSRF_COOKIE_HTTPONLY=True
+SESSION_COOKIE_HTTPONLY=True
+CSRF_COOKIE_SECURE=False
+SESSION_COOKIE_SECURE=False
+CORS_EXPOSE_HEADERS='["Content-Type","X-CSRFToken]'
+CORS_ALLOW_CREDENTIALS=True
+```
+
 - Run `py manage.py collectstatic`
 - Run `py manage.py runserver`
 
