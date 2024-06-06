@@ -127,13 +127,24 @@ STATIC_ROOT = "collectedstatic/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:8001", "http://127.0.0.1:8001"]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8001",
+    "http://127.0.0.1:8001",
+    "http://localhost:80",
+    "http://127.0.0.1:80",
+]
 
 CSRF_COOKIE_SAMESITE = "Lax"
 SESSION_COOKIE_SAMESITE = "Lax"
 CSRF_COOKIE_HTTPONLY = True
 SESSION_COOKIE_HTTPONLY = True
-CSRF_TRUSTED_ORIGINS = ["http://localhost:8001"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8001",
+    "http://127.0.0.1:8001",
+    "http://localhost:80",
+    "http://127.0.0.1:80",
+]
+
 
 # PROD ONLY
 # CSRF_COOKIE_SECURE = True
