@@ -1,5 +1,4 @@
 *env/
 .env
 node_modules/
-environmentVariables.js
 backend/collectedstatic
