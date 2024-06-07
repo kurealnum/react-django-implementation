@@ -1,3 +1,4 @@
+import { checkAuthenticated } from "../features/authStore/authSlice";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -17,27 +18,19 @@ const initialState = {
 
 function authReducer(state = initialState, action) {
   switch (action.payload) {
-    case AUTHENTICATED_SUCCESS:
-    case AUTHENTICATED_FAIL:
-      return {
-        ...state,
-        isAuthenticated: action.payload,
-      };
     case REGISTER_SUCCESS:
-      return {
-        ...state,
-        isAuthenticated: false,
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        isAuthenticated: true,
-      };
+    case AUTHENTICATED_FAIL:
     case LOGOUT_SUCCESS:
     case DELETE_USER_SUCCESS:
       return {
         ...state,
         isAuthenticated: false,
+      };
+    case LOGIN_SUCCESS:
+    case AUTHENTICATED_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
       };
     case REGISTER_FAIL:
     case LOGIN_FAIL:
@@ -49,4 +42,14 @@ function authReducer(state = initialState, action) {
   }
 }
 
-export { authReducer };
+async function checkIfAuthenticatedOnServer() {
+  const request = await fetch("api/accounts/is-authenticated");
+  if (request.ok) {
+    checkAuthenticated(AUTHENTICATED_SUCCESS);
+    return true;
+  }
+  checkAuthenticated(AUTHENTICATED_FAIL);
+  return false;
+}
+
+export { authReducer, checkIfAuthenticatedOnServer };

@@ -22,17 +22,18 @@ def login_user(request):
         return Response({"error": "Something went wrong when logging in"}, status=401)
 
 
-def is_authenticated(self, request, format=None):
+def check_is_authenticated(self, request):
     user = self.request.user
 
     try:
         isAuthenticated = user.is_authenticated
 
         if isAuthenticated:
-            return Response({"isAuthenticated": "success"})
+            return Response({"isAuthenticated": "success"}, status=200)
         else:
-            return Response({"isAuthenticated": "error"})
+            return Response({"isAuthenticated": "error"}, status=403)
     except:
         return Response(
-            {"error": "Something went wrong when checking authentication status"}
+            {"error": "Something went wrong when checking authentication status"},
+            status=404,
         )
