@@ -12,5 +12,5 @@ export const authSlice = createSlice({
 });
 
 export const { checkAuthenticated } = authSlice.actions;
-console.log(authSlice.actions);
+
 export default authSlice.reducer;
