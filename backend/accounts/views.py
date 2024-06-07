@@ -22,8 +22,9 @@ def login_user(request):
         return Response({"error": "Something went wrong when logging in"}, status=401)
 
 
-def check_is_authenticated(self, request):
-    user = self.request.user
+@api_view(["GET"])
+def check_is_authenticated(request):
+    user = request.user
 
     try:
         isAuthenticated = user.is_authenticated

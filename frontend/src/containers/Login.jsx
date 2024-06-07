@@ -5,15 +5,14 @@ import { useSelector } from "react-redux";
 
 function Login() {
   const [formData, setFormData] = useState({ username: "", password: "" });
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const navigate = useNavigate();
   const onFormChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   function onFormSubmit(e) {
     e.preventDefault();
-    login(formData).then(() => {
-      if (!isAuthenticated) {
+    login(formData).then((isAuth) => {
+      if (isAuth) {
         navigate("/dashboard");
       }
     });

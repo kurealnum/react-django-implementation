@@ -15,6 +15,8 @@ async function login({ username, password }) {
   } else {
     store.dispatch(checkAuthenticated(LOGIN_FAIL));
   }
+
+  return store.getState().auth.isAuthenticated;
 }
 
 export { login };

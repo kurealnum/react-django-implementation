@@ -43,7 +43,12 @@ function authReducer(state = initialState, action) {
 }
 
 async function checkIfAuthenticatedOnServer() {
-  const request = await fetch("api/accounts/is-authenticated");
+  const config = {
+    headers: { "Content-Type": "application/json" },
+    method: "GET",
+    credentials: "include",
+  };
+  const request = await fetch("/api/accounts/is-authenticated/", config);
   if (request.ok) {
     checkAuthenticated(AUTHENTICATED_SUCCESS);
     return true;
