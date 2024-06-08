@@ -10,6 +10,8 @@ import {
   AUTHENTICATED_FAIL,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAIL,
+  NOT_LOGGED_IN,
+  LOGGED_IN,
 } from "../features/types";
 
 const initialState = {
@@ -22,12 +24,14 @@ function authReducer(state = initialState, action) {
     case AUTHENTICATED_FAIL:
     case LOGOUT_SUCCESS:
     case DELETE_USER_SUCCESS:
+    case NOT_LOGGED_IN:
       return {
         ...state,
         isAuthenticated: false,
       };
     case LOGIN_SUCCESS:
     case AUTHENTICATED_SUCCESS:
+    case LOGGED_IN:
       return {
         ...state,
         isAuthenticated: true,

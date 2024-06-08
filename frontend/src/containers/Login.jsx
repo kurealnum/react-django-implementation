@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { login } from "../features/auth";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 function Login() {
   const [formData, setFormData] = useState({ username: "", password: "" });
