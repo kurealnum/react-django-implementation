@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 @api_view(["POST"])
@@ -38,3 +38,12 @@ def check_is_authenticated(request):
             {"error": "Something went wrong when checking authentication status"},
             status=404,
         )
+
+
+@api_view(["POST"])
+def logout_user(request):
+    try:
+        logout(request)
+        return Response({"success": "You have been logged out"}, status=200)
+    except:
+        return Response({"error": "Something went wrong"}, status=403)

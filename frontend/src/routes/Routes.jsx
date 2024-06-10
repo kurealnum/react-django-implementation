@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "../containers/Login";
 import AuthenticatedRoute from "./AuthenticatedRoutes";
 import Dashboard from "../containers/Dashboard";
+import Logout from "../containers/Logout";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
         <Dashboard />
       </AuthenticatedRoute>
     ),
+  },
+  {
+    path: "/logout",
+    element: <Logout />,
   },
 ]);
 
