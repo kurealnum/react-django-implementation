@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { logout } from "../features/auth";
 import { useEffect, useState } from "react";
+import ErrorMessage from "../components/ErrorMessage";
 
 function Logout() {
   const isLoggedOut = logout();
@@ -18,10 +19,12 @@ function Logout() {
     });
   }, [isLoggedOut, navigate]);
 
-  return isError ? (
-    <p>There was an issue logging you out!</p>
-  ) : (
-    <p>Logging you out...</p>
+  return (
+    <ErrorMessage
+      isError={isError}
+      message={"There was an issue logging you out!"}
+      altMessage={"Logging you out..."}
+    />
   );
 }
 
