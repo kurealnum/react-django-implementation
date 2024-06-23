@@ -2,7 +2,11 @@
 
 Just an example of how React and Django can play nice.
 
-# Setup
+# Docker Setup
+
+This is a work in progress.
+
+# Manual Setup
 
 ## Frontend Setup
 
