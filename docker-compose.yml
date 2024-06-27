@@ -1,0 +1,12 @@
+services:
+    backend:
+        build: 
+            context: ./backend
+            dockerfile: ./Dockerfile
+        ports: 
+            - "6900:6900"
+    rdi-postgres:
+        image: postgres:latest
+        container_name: rdi-postgres
+        environment: 
+            - POSTGRES_DB=
