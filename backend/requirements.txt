@@ -8,6 +8,7 @@ django-stubs-ext==4.2.7
 djangorestframework==3.14.0
 djangorestframework-stubs==3.14.5
 idna==3.6
+psycopg2-binary==2.9.9
 python-dotenv==1.0.1
 pytz==2024.1
 requests==2.31.0

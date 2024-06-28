@@ -1,12 +1,24 @@
 services:
+    rdi-postgres:
+        image: postgres:latest
+        container_name: rdi-postgres
+        environment: 
+            - POSTGRES_DB=${DATABASE_NAME}
+            - POSTGRES_USER=${DATABASE_USER}
+            - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+        ports:
+            - '5432:5432'
+        volumes:
+            - pg_data:/var/lib/postgresql/data
+
     backend:
         build: 
             context: ./backend
             dockerfile: ./Dockerfile
         ports: 
             - "6900:6900"
-    rdi-postgres:
-        image: postgres:latest
-        container_name: rdi-postgres
-        environment: 
-            - POSTGRES_DB=
+        depends_on:
+            - rdi-postgres
+
+volumes:
+    pg_data:
