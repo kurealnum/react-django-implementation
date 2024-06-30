@@ -94,7 +94,7 @@ DATABASES = {
         "NAME": "rdi_database",
         "USER": environ.get("DB_USERNAME"),
         "PASSWORD": environ.get("DB_PASSWORD"),
-        "HOST": "0.0.0.0",
+        "HOST": "postgres",
         "PORT": environ.get("DB_PORT"),
     }
 }

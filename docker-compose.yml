@@ -1,7 +1,7 @@
 services:
-    rdi-postgres:
+    postgres:
         image: postgres:latest
-        container_name: rdi-postgres
+        container_name: postgres
         environment: 
             - POSTGRES_DB=${DATABASE_NAME}
             - POSTGRES_USER=${DATABASE_USER}
@@ -12,13 +12,14 @@ services:
             - pg_data:/var/lib/postgresql/data
 
     backend:
+        container_name: backend
         build: 
             context: ./backend
             dockerfile: ./Dockerfile
         ports: 
             - "6900:6900"
         depends_on:
-            - rdi-postgres
+            - postgres
 
 volumes:
     pg_data:
