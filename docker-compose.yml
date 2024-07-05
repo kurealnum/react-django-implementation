@@ -6,7 +6,7 @@ services:
             - POSTGRES_DB=${DATABASE_NAME}
             - POSTGRES_USER=${DATABASE_USER}
             - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
-        ports:
+        expose:
             - '5432:5432'
         volumes:
             - pg_data:/var/lib/postgresql/data
@@ -16,10 +16,21 @@ services:
         build: 
             context: ./backend
             dockerfile: ./Dockerfile
-        ports: 
+        ports:
             - "6900:6900"
         depends_on:
             - postgres
+
+    nginx:
+        container_name: nginx
+        build: 
+            context: ./nginx
+            dockerfile: ./Dockerfile
+        ports:
+            - "1337:80"
+        depends_on:
+            - "backend"
+
 
 volumes:
     pg_data:
