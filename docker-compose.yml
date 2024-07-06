@@ -11,12 +11,20 @@ services:
         volumes:
             - pg_data:/var/lib/postgresql/data
 
+    frontend:
+        container_name: frontend
+        build:
+            context: ./frontend
+            dockerfile: ./Dockerfile
+        expose:
+            - "6901:6901"
+
     backend:
         container_name: backend
         build: 
             context: ./backend
             dockerfile: ./Dockerfile
-        ports:
+        expose:
             - "6900:6900"
         depends_on:
             - postgres
@@ -30,7 +38,6 @@ services:
             - "1337:80"
         depends_on:
             - "backend"
-
 
 volumes:
     pg_data:

@@ -4,7 +4,7 @@ upstream backend_upstream
 }
 upstream frontend_upstream
 {
-	server backend:6901;
+	server frontend:6901;
 }
 server
 {
