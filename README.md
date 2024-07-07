@@ -4,7 +4,7 @@ Just an example of how React and Django can play nice.
 
 # Docker Setup
 
-This is a work in progress.
+Run `docker compose up`. That _should_ be it.
 
 # Manual Setup
 
