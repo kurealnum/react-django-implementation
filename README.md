@@ -4,9 +4,35 @@ Just an example of how React and Django can play nice.
 
 # Docker Setup
 
-Run `docker compose up`. That _should_ be it.
+Create a `.env` file in the root of the project. Paste (and edit as necessarry) these variables:
 
-(If you are in development, and you'd like live reloading, run `docker compose up -w`)
+```
+DATABASE_NAME="MyAwesomeDatabaseName"
+DATABASE_USER="postgres"
+DATABASE_PASSWORD="MyDatabasePassword"
+```
+
+Then, create file named `settings.env` in the `./backend/backend` directory. Paste (and edit as necessarry) these variables:
+
+```
+DJANGO_SECRET_KEY="my-secret-key"
+DEBUG=True
+ALLOWED_HOSTS='["*"]'
+
+CORS_ALLOWED_ORIGINS='["http://localhost:80","http://127.0.0.1:80"]'
+CSRF_TRUSTED_ORIGINS='["http://localhost:80","http://127.0.0.1:80"]'
+
+CSRF_COOKIE_SAMESITE="Strict"
+SESSION_COOKIE_SAMESITE="Strict"
+CSRF_COOKIE_HTTPONLY=True
+SESSION_COOKIE_HTTPONLY=True
+CSRF_COOKIE_SECURE=False
+SESSION_COOKIE_SECURE=False
+CORS_EXPOSE_HEADERS='["Content-Type","X-CSRFToken]'
+CORS_ALLOW_CREDENTIALS=True
+```
+
+Finally, run `docker compose up`. If you are in development, and you'd like live reloading, run `docker compose up -w`.
 
 # Manual Setup
 
