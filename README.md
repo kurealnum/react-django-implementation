@@ -6,6 +6,8 @@ Just an example of how React and Django can play nice.
 
 Run `docker compose up`. That _should_ be it.
 
+(If you are in development, and you'd like live reloading, run `docker compose up -w`)
+
 # Manual Setup
 
 ## Frontend Setup

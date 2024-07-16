@@ -18,6 +18,13 @@ services:
             dockerfile: ./Dockerfile
         expose:
             - "6901:6901"
+        develop:
+            watch:
+                - action: sync
+                  path: ./frontend
+                  target: /frontend_src
+                  ignore: 
+                    - node_modules/
 
     backend:
         container_name: backend
@@ -28,6 +35,11 @@ services:
             - "6900:6900"
         depends_on:
             - postgres
+        develop:
+            watch:
+                - action: sync
+                  path: ./backend
+                  target: /backend_src
 
     nginx:
         container_name: nginx
