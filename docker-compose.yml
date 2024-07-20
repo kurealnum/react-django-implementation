@@ -13,9 +13,9 @@ services:
         healthcheck:
             test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}"]
             interval: 1s
-            retries: 10
-            start_period: 30s
-            timeout: 10s
+            retries: 3 
+            start_period: 3s
+            timeout: 3s
 
     frontend:
         container_name: frontend
@@ -65,7 +65,7 @@ services:
                 - action: sync
                   path: ./backend
                   target: /backend_src
-        restart: on-failure:10
+        restart: unless-stopped
 
     nginx:
         container_name: nginx
