@@ -50,6 +50,11 @@ Finally, run `docker compose up`. If you are in development, and you'd like live
 - Paste (and edit as necessarry) these variables:
 
 ```
+DATABASE_NAME="MyAwesomeDatabaseName"
+DATABASE_USER="postgres"
+DATABASE_PASSWORD="MyDatabasePassword"
+DATABASE_PORT=5432
+
 DJANGO_SECRET_KEY="my-secret-key"
 DEBUG=True
 ALLOWED_HOSTS='["*"]'
@@ -59,7 +64,7 @@ CSRF_TRUSTED_ORIGINS='["http://localhost:1337","http://127.0.0.1:1337"]'
 
 CSRF_COOKIE_SAMESITE="Strict"
 SESSION_COOKIE_SAMESITE="Strict"
-CSRF_COOKIE_HTTPONLY=True
+CSRF_COOKIE_HTTPONLY=False
 SESSION_COOKIE_HTTPONLY=True
 CSRF_COOKIE_SECURE=False
 SESSION_COOKIE_SECURE=False
