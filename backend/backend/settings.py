@@ -37,7 +37,7 @@ SECRET_KEY = environ.get("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = json.loads(environ.get("ALLOWED_HOSTS", []))  # type: ignore
+ALLOWED_HOSTS = json.loads(environ.get("ALLOWED_HOSTS", "[]"))  # type: ignore
 
 
 # Application definition
@@ -92,11 +92,11 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "rdi_database",
-        "USER": environ.get("DB_USERNAME"),
-        "PASSWORD": environ.get("DB_PASSWORD"),
+        "NAME": environ.get("DATABASE_NAME"),
+        "USER": environ.get("DATABASE_USER"),
+        "PASSWORD": environ.get("DATABASE_PASSWORD"),
         "HOST": "postgres",
-        "PORT": environ.get("DB_PORT"),
+        "PORT": environ.get("DATABASE_PORT"),
     }
 }
 

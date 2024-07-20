@@ -10,6 +10,12 @@ services:
             - '5432:5432'
         volumes:
             - pg_data:/var/lib/postgresql/data
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}"]
+            interval: 3s
+            retries: 5
+            start_period: 30s
+            timeout: 10s
 
     frontend:
         container_name: frontend
@@ -27,6 +33,24 @@ services:
                     - node_modules/
 
     backend:
+        environment:
+            - DATABASE_NAME=${DATABASE_NAME}
+            - DATABASE_USER=${DATABASE_USER}
+            - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+            - DATABASE_PORT=${DATABASE_PORT}
+            - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+            - DEBUG=${DEBUG}
+            - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+            - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+            - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
+            - CSRF_COOKIE_SAMESITE=${CSRF_COOKIE_SAMESITE}
+            - SESSION_COOKIE_SAMESITE=${SESSION_COOKIE_SAMESITE}
+            - CSRF_COOKIE_HTTPONLY=${CSRF_COOKIE_HTTPONLY}
+            - SESSION_COOKIE_HTTPONLY=${SESSION_COOKIE_HTTPONLY}
+            - CSRF_COOKIE_SECURE=${CSRF_COOKIE_SECURE}
+            - SESSION_COOKIE_SECURE=${SESSION_COOKIE_SECURE}
+            - CORS_EXPOSE_HEADERS=${CORS_EXPOSE_HEADERS}
+            - CORS_ALLOW_CREDENTIALS=${CORS_ALLOW_CREDENTIALS}
         container_name: backend
         build: 
             context: ./backend
@@ -34,12 +58,14 @@ services:
         expose:
             - "6900:6900"
         depends_on:
-            - postgres
+            postgres:
+                condition: service_healthy
         develop:
             watch:
                 - action: sync
                   path: ./backend
                   target: /backend_src
+        restart: on-failure:10
 
     nginx:
         container_name: nginx
