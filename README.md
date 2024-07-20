@@ -18,12 +18,12 @@ DJANGO_SECRET_KEY="my-secret-key"
 DEBUG=True
 ALLOWED_HOSTS='["*"]'
 
-CORS_ALLOWED_ORIGINS='["http://localhost:80","http://127.0.0.1:80"]'
-CSRF_TRUSTED_ORIGINS='["http://localhost:80","http://127.0.0.1:80"]'
+CORS_ALLOWED_ORIGINS='["http://localhost:1337","http://127.0.0.1:1337"]'
+CSRF_TRUSTED_ORIGINS='["http://localhost:1337","http://127.0.0.1:1337"]'
 
 CSRF_COOKIE_SAMESITE="Strict"
 SESSION_COOKIE_SAMESITE="Strict"
-CSRF_COOKIE_HTTPONLY=True
+CSRF_COOKIE_HTTPONLY=False
 SESSION_COOKIE_HTTPONLY=True
 CSRF_COOKIE_SECURE=False
 SESSION_COOKIE_SECURE=False
@@ -54,8 +54,8 @@ DJANGO_SECRET_KEY="my-secret-key"
 DEBUG=True
 ALLOWED_HOSTS='["*"]'
 
-CORS_ALLOWED_ORIGINS='["http://localhost:80","http://127.0.0.1:80"]'
-CSRF_TRUSTED_ORIGINS='["http://localhost:80","http://127.0.0.1:80"]'
+CORS_ALLOWED_ORIGINS='["http://localhost:1337","http://127.0.0.1:1337"]'
+CSRF_TRUSTED_ORIGINS='["http://localhost:1337","http://127.0.0.1:1337"]'
 
 CSRF_COOKIE_SAMESITE="Strict"
 SESSION_COOKIE_SAMESITE="Strict"
