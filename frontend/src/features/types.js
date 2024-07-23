@@ -1,3 +1,5 @@
+//not sure what repo i got this from, but I know it's from this user: https://github.com/techwithtim
+
 // Auth Dispatch States
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
