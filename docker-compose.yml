@@ -1,7 +1,7 @@
 services:
     postgres:
         image: postgres:latest
-        container_name: postgres
+        container_name: rdi-postgres
         environment: 
             - POSTGRES_DB=${DATABASE_NAME}
             - POSTGRES_USER=${DATABASE_USER}
@@ -9,7 +9,7 @@ services:
         expose:
             - '5432:5432'
         volumes:
-            - pg_data:/var/lib/postgresql/data
+            - rdi-pg_data:/var/lib/postgresql/data
         healthcheck:
             test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USER} -d ${DATABASE_NAME}"]
             interval: 1s
@@ -18,7 +18,7 @@ services:
             timeout: 3s
 
     frontend:
-        container_name: frontend
+        container_name: rdi-frontend
         build:
             context: ./frontend
             dockerfile: ./Dockerfile
@@ -51,7 +51,7 @@ services:
             - SESSION_COOKIE_SECURE=${SESSION_COOKIE_SECURE}
             - CORS_EXPOSE_HEADERS=${CORS_EXPOSE_HEADERS}
             - CORS_ALLOW_CREDENTIALS=${CORS_ALLOW_CREDENTIALS}
-        container_name: backend
+        container_name: rdi-backend
         build: 
             context: ./backend
             dockerfile: ./Dockerfile
@@ -68,7 +68,7 @@ services:
         restart: unless-stopped
 
     nginx:
-        container_name: nginx
+        container_name: rdi-nginx
         build: 
             context: ./nginx
             dockerfile: ./Dockerfile
@@ -78,4 +78,4 @@ services:
             - "backend"
 
 volumes:
-    pg_data:
+    rdi-pg_data:

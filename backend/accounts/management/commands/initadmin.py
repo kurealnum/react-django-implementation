@@ -2,18 +2,19 @@
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from django.contrib.auth.models import User
+
+from accounts.models import CustomUser
 
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        if User.objects.count() == 0:
+        if CustomUser.objects.count() == 0:
             username = "ADMIN"
             email = "admin@gmail.com"
             password = "ADMIN"
             print("Creating account for %s (%s)" % (username, email))
-            admin = User.objects.create_superuser(
+            admin = CustomUser.objects.create_superuser(
                 email=email, username=username, password=password
             )
             admin.is_active = True

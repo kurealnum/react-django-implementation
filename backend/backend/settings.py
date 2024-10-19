@@ -41,6 +41,7 @@ ALLOWED_HOSTS = json.loads(environ.get("ALLOWED_HOSTS", "[]"))  # type: ignore
 
 
 # Application definition
+AUTH_USER_MODEL = "accounts.CustomUser"
 
 INSTALLED_APPS = [
     "django.contrib.admin",

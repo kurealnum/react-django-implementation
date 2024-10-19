@@ -86,3 +86,12 @@ CORS_ALLOW_CREDENTIALS=True
 
 Q: What purpose does `backend/collectedstatic/` serve if we aren't using Django to serve static files?
 A: The Admin site
+
+Q: How do I create a migration with `makemigrations`?
+A: First, copy your base .env file to `/backend/backend`. Then, create a virtual environment with `py -m venv env`. Then, activate said virtual environment with `. env/bin/activate` (commands will differ between operating systems). Next, install all of the required packages with `pip install -r /backend/requirements.txt`. Finally, you can go into the `/backend` folder and run `python3 manage.py makemigrations`. Django will likely buffer for a few seconds when making migrations, and spit out an error something along the lines of this:
+
+```
+could not translate host name "postgres" to address: No address associated with hostname
+```
+
+This is fine. You're only geting this error because you aren't running `makemigrations` inside your Docker container.

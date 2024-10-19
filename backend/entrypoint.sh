@@ -1,4 +1,3 @@
-python3 manage.py makemigrations
 python3 manage.py migrate
 # creates a superuser
 python3 manage.py initadmin

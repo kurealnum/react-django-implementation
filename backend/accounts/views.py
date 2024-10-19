@@ -1,6 +1,11 @@
 from rest_framework.decorators import api_view
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, login, logout
+from rest_framework.views import APIView
+from rest_framework import status
+
+from .serializers import CustomUserSerializer
 
 
 @api_view(["POST"])
@@ -47,3 +52,17 @@ def logout_user(request):
         return Response({"success": "You have been logged out"}, status=200)
     except:
         return Response({"error": "Something went wrong"}, status=403)
+
+
+class RegisterView(APIView):
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        data = request.data
+        serializer = CustomUserSerializer(data=data)
+        serializer.is_valid()
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(status=status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
