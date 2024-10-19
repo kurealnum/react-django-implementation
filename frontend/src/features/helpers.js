@@ -13,4 +13,16 @@ const getCookie = (name) => {
   return cookieValue;
 };
 
+async function register(formData) {
+  const config = {
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify(formData),
+  };
+  const response = await fetch("/api/accounts/register/", config);
+  return response.ok;
+}
+
 export default getCookie;
+export { register };

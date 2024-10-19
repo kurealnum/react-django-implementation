@@ -3,6 +3,7 @@ import Login from "../containers/Login";
 import AuthenticatedRoute from "./AuthenticatedRoutes";
 import Dashboard from "../containers/Dashboard";
 import Logout from "../containers/Logout";
+import Register from "../containers/Register";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/logout",
     element: <Logout />,
+  },
+  {
+    path: "register",
+    element: <Register />,
   },
 ]);
 
