@@ -6,3 +6,5 @@ class CustomUser(AbstractUser):
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(max_length=200)
     password = models.CharField(max_length=100, unique=False)
+    is_mod = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
