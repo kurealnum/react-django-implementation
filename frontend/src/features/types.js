@@ -1,4 +1,4 @@
-//not sure what repo i got this from, but I know it's from this user: https://github.com/techwithtim
+// Not sure what repo I got this from, but I know it's from this user: https://github.com/techwithtim
 
 // Auth Dispatch States
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
@@ -11,6 +11,9 @@ export const AUTHENTICATED_SUCCESS = "AUTHENTICATED_SUCCESS";
 export const AUTHENTICATED_FAIL = "AUTHENTICATED_FAIL";
 export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
 export const DELETE_USER_FAIL = "DELETE_USER_FAIL";
+export const IS_MODERATOR_TRUE = "IS_MODERATOR_TRUE";
+export const IS_ADMIN_TRUE = "IS_ADMIN_TRUE";
+export const IS_SUPERUSER_TRUE = "IS_SUPERUSER_TRUE";
 
 // Profile Dispatch States
 export const LOAD_USER_PROFILE_SUCCESS = "LOAD_USER_PROFILE_SUCCESS";

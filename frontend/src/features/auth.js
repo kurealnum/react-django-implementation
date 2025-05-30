@@ -10,7 +10,10 @@ import getCookie from "./helpers";
 
 async function login({ username, password }) {
   const config = {
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCookie("csrftoken"),
+    },
     credentials: "include",
     method: "POST",
     body: JSON.stringify({ username, password }),
@@ -22,7 +25,7 @@ async function login({ username, password }) {
     store.dispatch(checkAuthenticated(LOGIN_FAIL));
   }
 
-  return store.getState().auth.isAuthenticated;
+  return store.getState().store.isAuthenticated;
 }
 
 async function logout() {
@@ -42,7 +45,7 @@ async function logout() {
     store.dispatch(checkAuthenticated(LOGOUT_FAIL));
   }
 
-  return store.getState().auth.isAuthenticated;
+  return store.getState().store.isAuthenticated;
 }
 
 export { login, logout };

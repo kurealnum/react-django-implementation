@@ -14,7 +14,7 @@ function Login() {
     e.preventDefault();
     login(formData).then((isAuth) => {
       if (isAuth) {
-        navigate("/dashboard");
+        navigate("/login-redirect");
       } else {
         setIsError(true);
       }

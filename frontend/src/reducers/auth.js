@@ -12,6 +12,9 @@ import {
   DELETE_USER_FAIL,
   NOT_LOGGED_IN,
   LOGGED_IN,
+  IS_MODERATOR_TRUE,
+  IS_ADMIN_TRUE,
+  IS_SUPERUSER_TRUE,
 } from "../features/types";
 
 const initialState = {
@@ -41,6 +44,12 @@ function authReducer(state = initialState, action) {
     case LOGOUT_FAIL:
     case DELETE_USER_FAIL:
       return state;
+    case IS_MODERATOR_TRUE:
+      return { ...state, isMod: true };
+    case IS_ADMIN_TRUE:
+      return { ...state, isAdmin: true };
+    case IS_SUPERUSER_TRUE:
+      return { ...state, isSuperuser: true };
     default:
       return state;
   }
@@ -55,10 +64,10 @@ async function checkIfAuthenticatedOnServer() {
   const request = await fetch("/api/accounts/is-authenticated/", config);
   if (request.ok) {
     checkAuthenticated(AUTHENTICATED_SUCCESS);
-    return true;
+    return request.json();
   }
   checkAuthenticated(AUTHENTICATED_FAIL);
-  return false;
+  return request.json();
 }
 
 export { authReducer, checkIfAuthenticatedOnServer };

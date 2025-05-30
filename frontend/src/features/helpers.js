@@ -1,3 +1,4 @@
+import store from "./authStore/store";
 const getCookie = (name) => {
   let cookieValue = null;
   if (document.cookie && document.cookie !== "") {
@@ -24,5 +25,25 @@ async function register(formData) {
   return response.ok;
 }
 
+function isMod() {
+  const currentStore = store.getState().store;
+  return currentStore.isMod || currentStore.isAdmin || currentStore.isSuperuser;
+}
+
+function isAdmin() {
+  const currentStore = store.getState().store;
+  return currentStore.isAdmin || currentStore.isSuperuser;
+}
+
+function isSuperuser() {
+  const currentStore = store.getState().store;
+  return currentStore.isSuperuser;
+}
+
+function isAuthenticated() {
+  const currentStore = store.getState().store;
+  return currentStore.isAuthenticated;
+}
+
 export default getCookie;
-export { register };
+export { register, isMod, isAdmin, isSuperuser, isAuthenticated };
